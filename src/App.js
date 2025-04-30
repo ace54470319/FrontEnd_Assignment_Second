@@ -5,11 +5,26 @@ import InputFocusApp from './Input_Focus/InputFocusApp';
 function App() {
   const [chooseProblem, setChooseProblem] = useState(0);
 
-  function changeProblem(value) {
-    setChooseProblem(value);
-  }
+  const propsState = {
+    chooseProblem,
+    setChooseProblem,
+  };
   return (
     <div className="App">
+      <Problem_Filter {...propsState}></Problem_Filter>
+      {chooseProblem == 1 && <LikeApp></LikeApp>}
+      {chooseProblem == 2 && <InputFocusApp></InputFocusApp>}
+      {chooseProblem == 3 && <></>}
+    </div>
+  );
+}
+
+function Problem_Filter(props) {
+  function changeProblem(value) {
+    props.setChooseProblem(value);
+  }
+  return (
+    <div>
       {[1, 2, 3].map((item, index) => {
         return (
           <button
@@ -22,8 +37,6 @@ function App() {
           </button>
         );
       })}
-      {chooseProblem == 1 && <LikeApp></LikeApp>}
-      {chooseProblem == 2 && <InputFocusApp></InputFocusApp>}
     </div>
   );
 }
