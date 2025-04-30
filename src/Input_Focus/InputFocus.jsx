@@ -1,14 +1,21 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 function InputFocus() {
   const focusInput = useRef(null);
-  useEffect((e) => {
-    //alert('내용 입력하시오.');
-    return focusInput.current.focus();
+  const [count, setCount] = useState('');
+  useEffect(() => {
+    focusInput.current.focus();
   }, []);
+
+  const changeCount = (e) => {
+    setCount(e.target.value);
+  };
   return (
     <div>
-      텍스트 입력 : <input type="text" ref={focusInput} />
+      <div>
+        텍스트 입력 : <input onChange={changeCount} type="text" ref={focusInput} />
+      </div>
+      <span>현재 텍스트 길이 : {count.length}</span>
     </div>
   );
 }
